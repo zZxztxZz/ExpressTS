@@ -4,6 +4,9 @@ import { RecordService } from "../service/RecordService";
 import { UserService } from "../service/UserService";
 import { Message } from "../utils/Message";
 import { BOOK_IS_NOT_AVAILIABLE, PARMS_ERROR } from "../utils/Code";
+import { Record } from "../commonClasses/Record";
+import { User } from "../commonClasses/User";
+import { Book } from "../commonClasses/Book";
 
 class RecordController{
 
@@ -43,7 +46,12 @@ class RecordController{
 
     //查询所有记录
     listAll = async(req:Request,res:Response)=>{
-        res.send(Message.success(this.recordService.findAllRecord()));
+        var recordList = this.recordService.findAllRecord();
+        var resultData = new Array();
+        for(var record of recordList){
+            resultData.push(this.findUserAndBookByRecord(record))
+        }
+        res.send(Message.success(resultData));
     }
 
 
@@ -60,9 +68,28 @@ class RecordController{
         if(message.getStatus()!==0){
             return res.status(400).send(message);
         }
+        var recordList = this.recordService.findRecordByUserId(userId);
+        var resultData = new Array();
+        for(var record of recordList){
+            resultData.push(this.findUserAndBookByRecord(record));
+        }
+        res.send(Message.success(resultData));
 
-        res.send(Message.success(this.recordService.findRecordByUserId(userId)));
+    }
 
+    //联查
+    findUserAndBookByRecord(record:Record){
+        var user:User = UserService.getInstance().selectUserById(record.getUserId()).data;
+        var book:Book = BookService.getInstance().selectBookById(record.getBookId()).data;
+        return{
+            "userId":record.getUserId(),
+            "userName":user.getName(),
+            "bookId":record.getBookId(),
+            "bookName":book.getbookName(),
+            "startTime":record.startTime,
+            "endTime":record.endTime,
+            "finished":record.finished
+        }
     }
 }
 
