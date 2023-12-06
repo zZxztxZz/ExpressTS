@@ -41,6 +41,6 @@ export class Message{
 
 }
 
-enum Status{
+export enum Status{
         OK,Error,WARNING,CONDITION
 }
