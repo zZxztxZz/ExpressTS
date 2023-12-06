@@ -13,7 +13,7 @@ class UserController{
         var userId = req.body.id;
         var userName = req.body.name;
         if(userId===undefined||userName===undefined){
-            res.status(400).send(Message.fail(PARMS_ERROR));
+            return res.status(400).send(Message.fail(PARMS_ERROR));
         }
 
         var message = this.service.addUser(new User(userId,userName));
