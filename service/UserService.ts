@@ -3,9 +3,18 @@ import { Message } from "../utils/Message";
 import { User } from "../commonClasses/User";
 
 export class UserService{
-    userList:Array<User>
+    userList:Array<User>;
+    private static instance:UserService;
+
     constructor(){
-        this.userList=new Array<User>()
+        this.userList=new Array<User>();
+    }
+
+    public static getInstance(){
+        if(!this.instance){
+            this.instance = new UserService();
+        }
+        return this.instance;
     }
 
     addUser(userAdd:User):Message{
@@ -19,7 +28,7 @@ export class UserService{
     }
 
     selectAll():Message{
-        return Message.success(this.userList)
+        return Message.success(this.userList);
     }
 
     selectUserById(userId:string):Message{

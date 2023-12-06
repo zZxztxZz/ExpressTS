@@ -6,7 +6,7 @@ import { PARMS_ERROR } from "../utils/Code";
 
 class UserController{
 
-    service = new UserService();
+    service = UserService.getInstance();
 
     //注册
     register = async(req:Request,res:Response)=>{

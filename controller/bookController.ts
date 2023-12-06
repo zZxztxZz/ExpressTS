@@ -6,7 +6,7 @@ import { BookService } from "../service/BookService";
 
 class BookController{
 
-    service = new BookService();
+    service = BookService.getInstance();
 
     //注册
     addBook = async(req:Request,res:Response)=>{
