@@ -8,7 +8,7 @@
     "ts-build": "tsc",
     "build": "npm run ts-build && npm run copy-static",
     "test": "jest",
-    "test:coverage":"jest --coverage"
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -28,6 +28,7 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.3",
     "@types/shelljs": "^0.8.15",
+    "axios": "^1.6.2",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.3.3"
