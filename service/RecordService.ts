@@ -18,6 +18,15 @@ export class RecordService{
         this.recordList.push(new Record(userId,bookId));
     }
 
+    finishReading(userId:string,bookId:string){
+        for(var record of this.recordList){
+            if(record.getUserId()===userId&&record.getBookId()===bookId){
+                record.finishReading();
+            }
+        }
+    }
+
+
     isBookAvailable(bookId:string):boolean{
         for(var record of this.recordList){
             if(record.getBookId()===bookId && !record.available())return false;
@@ -43,5 +52,9 @@ export class RecordService{
 
     findAllRecord():Array<Record>{
         return this.recordList;
+    }
+
+    deleteAllRecord():void{
+        this.recordList=new Array<Record>();
     }
 }

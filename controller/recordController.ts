@@ -59,7 +59,7 @@ class RecordController{
     findRecordByUserId = async(req:Request,res:Response)=>{
         var userId = req.body.userId;
         //检测输入
-        if(userId===undefined){
+        if(userId===undefined||userId===""){
             return res.status(400).send(Message.fail(PARMS_ERROR));
         }
 
