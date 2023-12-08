@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52.17% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>12/23</span>
+                <span class='fraction'>23/23</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/9</span>
+                <span class='fraction'>9/9</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">55% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/20</span>
+                <span class='fraction'>20/20</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -110,28 +110,28 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -146,15 +146,15 @@ class BookController{
     service = BookService.getInstance();
 &nbsp;
     //注册
-    addBook = <span class="fstat-no" title="function not covered" >async(r</span>eq:Request,res:Response)=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
-        var bookId = <span class="cstat-no" title="statement not covered" >req.body.id;</span>
-        var bookName = <span class="cstat-no" title="statement not covered" >req.body.bookName;</span>
-<span class="cstat-no" title="statement not covered" >        <span class="missing-if-branch" title="if path not taken" >I</span>if(bookId===undefined||bookName===undefined){</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(400).send(Message.fail(PARMS_ERROR));</span>
+    addBook = async(req:Request,res:Response)=&gt;{
+        var bookId = req.body.id;
+        var bookName = req.body.bookName;
+        if(bookId===undefined||bookName===undefined){
+            return res.status(400).send(Message.fail(PARMS_ERROR));
         }
 &nbsp;
-        var message = <span class="cstat-no" title="statement not covered" >this.service.addBook(new Book(bookId,bookName));</span>
-<span class="cstat-no" title="statement not covered" >        res.status(message.getStatus()===0?200:400).send(message);</span>
+        var message = this.service.addBook(new Book(bookId,bookName));
+        res.status(message.getStatus()===0?200:400).send(message);
     }
 &nbsp;
     //查看全部
@@ -164,10 +164,10 @@ class BookController{
     }
 &nbsp;
     //通过id查找
-    selectBookById = <span class="fstat-no" title="function not covered" >async(r</span>eq:Request,res:Response)=&gt;<span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >{</span></span>
-        var bookId = <span class="cstat-no" title="statement not covered" >req.params.id</span>
-        var message = <span class="cstat-no" title="statement not covered" >this.service.selectBookById(bookId)</span>
-<span class="cstat-no" title="statement not covered" >        res.status(message.getStatus()===0?200:400).send(message);</span>
+    selectBookById = async(req:Request,res:Response)=&gt;{
+        var bookId = req.params.id
+        var message = this.service.selectBookById(bookId)
+        res.status(message.getStatus()===0?200:400).send(message);
     }
 }
 &nbsp;
@@ -178,7 +178,7 @@ export const bookController = new BookController();</pre></td></tr></table></pre
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Thu Dec 07 2023 16:21:44 GMT+0800 (中国标准时间)
+                at 2023-12-08T05:43:49.092Z
             </div>
         <script src="../prettify.js"></script>
         <script>

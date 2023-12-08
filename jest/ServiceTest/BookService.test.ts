@@ -1,7 +1,7 @@
 import { describe,expect,test } from "@jest/globals";
-import { BookService } from "../service/BookService";
-import { Book } from "../commonClasses/Book";
-import { BOOK_ADD_WITH_SAME_ID } from "../utils/Code";
+import { BookService } from "../../service/BookService";
+import { Book } from "../../commonClasses/Book";
+import { BOOK_ADD_WITH_SAME_ID } from "../../utils/Code";
 describe("BookService Test",()=>{
     var service:BookService;
     const First_Book_Id = "1";
