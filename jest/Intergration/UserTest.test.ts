@@ -14,20 +14,14 @@ describe("Integration User Test",()=>{
             expect(res.data.status).toBe(0)
             expect(res.data.data).toEqual([])
         })
-        .catch((err)=>{
-
-        })
     })
 
     test("Find user with wrong id",async()=>{
         await axios.get(BASE_URL+`user/${User_Id}`)
-        .then((res)=>{
-            expect(res.status).toBe(400)
-            expect(res.data.status).toBe(1)
-            expect(res.data.message).toBe(USER_ID_NOT_IN_LIST)
-        })
         .catch((err)=>{
-
+            expect(err.response.status).toBe(400)
+            expect(err.response.data.status).toBe(1)
+            expect(err.response.data.message).toBe(USER_ID_NOT_IN_LIST)
         })
     })
 
@@ -36,13 +30,10 @@ describe("Integration User Test",()=>{
             "userId":User_Id,
             "userName":User_Name
         })
-        .then((res)=>{
-            expect(res.status).toBe(400)
-            expect(res.data.status).toBe(1)
-            expect(res.data.message).toBe(PARMS_ERROR)
-        })
         .catch((err)=>{
-
+            expect(err.response.status).toBe(400)
+            expect(err.response.data.status).toBe(1)
+            expect(err.response.data.message).toBe(PARMS_ERROR)
         })
     })
 
@@ -55,9 +46,6 @@ describe("Integration User Test",()=>{
             expect(res.status).toBe(200)
             expect(res.data.status).toBe(0)
         })
-        .catch((err)=>{
-
-        })
     })
 
     test("Add user with same id",async()=>{
@@ -65,13 +53,11 @@ describe("Integration User Test",()=>{
             "id":User_Id,
             "name":User_Name
         })
-        .then((res)=>{
-            expect(res.status).toBe(400)
-            expect(res.data.status).toBe(1)
-            expect(res.data.message).toBe(USER_ADD_WITH_SAME_ID)
-        })
-        .catch((err)=>{
 
+        .catch((err)=>{
+            expect(err.response.status).toBe(400)
+            expect(err.response.data.status).toBe(1)
+            expect(err.response.data.message).toBe(USER_ADD_WITH_SAME_ID)
         })
     })
 
@@ -84,9 +70,6 @@ describe("Integration User Test",()=>{
                 "id":User_Id,
                 "name":User_Name
             })
-        })
-        .catch((err)=>{
-
         })
     })
 
@@ -101,9 +84,6 @@ describe("Integration User Test",()=>{
                     "name":User_Name
                 }
             ])
-        })
-        .catch((err)=>{
-
         })
     })
 })
