@@ -9,7 +9,31 @@ import usersRouter from './routes/users';
 import booksRouter from './routes/book';
 import recordRouter from './routes/record'
 
+import swaggerUi from 'swagger-ui-express'
+import swaggerJSDoc from 'swagger-jsdoc'
+
 var app = express();
+
+//配置 swagger-jsdoc
+const options ={
+  definition:{
+    openapi:'3.0.0',
+    info:{
+      title:'图书管理系统ExpressTS',
+      version:'1.0.0'
+    }
+  },
+  apis:[ path.join(__dirname,'/routes/*.ts')]
+}
+
+const swaggerSpec = swaggerJSDoc(options);
+
+app.get('/swagger.json',function(req,res){
+  res.setHeader('Content-Type','application/json');
+  res.send(swaggerSpec);
+});
+
+app.use('/api-docs',swaggerUi.serve,swaggerUi.setup(swaggerSpec));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
